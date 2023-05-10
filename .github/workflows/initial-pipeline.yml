@@ -1,35 +1,32 @@
-name: CI
+name: Initial Deployment Pipeline
 on:
   workflow_dispatch:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+
 jobs:
   integration:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - run: echo "This is the integration job"
         
   build:
-    needs: integration
     runs-on: ubuntu-latest
     steps:
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - uses: actions/checkout@v3
+      - run: echo "This is the build job"
 
-  test:
+  test-build:
     needs: build
-    environment: test
     runs-on: ubuntu-latest
     steps:
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - uses: actions/checkout@v3
+      - run: echo "This is the build job"
 
   development:
-    needs: build
     environment: development
     runs-on: ubuntu-latest
     steps:
@@ -37,7 +34,6 @@ jobs:
         run: echo Hello, world!
         
   staging:
-    needs: [build, test, development]
     environment: staging
     runs-on: ubuntu-latest
     steps:
@@ -61,7 +57,6 @@ jobs:
         run: echo Hello, world!
 
   test-production:
-    needs: staging
     environment: production
     runs-on: ubuntu-latest
     steps:
