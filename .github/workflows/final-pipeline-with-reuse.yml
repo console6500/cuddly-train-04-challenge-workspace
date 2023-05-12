@@ -44,7 +44,7 @@ jobs:
     needs: [development, test-artifact]
     runs-on: ubuntu-latest
     steps:
-      #- uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - uses: ./.github/workflows/deploy-environment.yml
         with:
           environment: Staging
