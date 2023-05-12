@@ -9,15 +9,18 @@ on:
 
 jobs:
   integration:
-    environment: Development
     uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: Development
 
   delivery:
     needs: [integration]
-    environment: Staging
     uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: Staging
 
   deployment:
     needs: [delivery]
-    environment: Production
     uses: ./.github/workflows/deploy-environment.yml
+    with:
+      environment: Production
