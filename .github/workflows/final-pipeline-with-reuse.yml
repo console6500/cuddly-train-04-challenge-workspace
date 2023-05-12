@@ -38,17 +38,12 @@ jobs:
       - run: echo "3. Deplopyment step one"
       - run: echo "4. Deplopyment step one"
       - run: echo "## Development deployment complete"
-        
+  
   staging:
-    environment: Staging
-    needs: [development, test-artifact]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/workflows/deploy-environment.yml
-        with:
-          environment: Staging
-
+    uses: ./.github/workflows/deploy-environment.yml
+    permissions:
+      contents: read        
+  
   test-staging:
     needs: [staging]
     runs-on: ubuntu-latest
