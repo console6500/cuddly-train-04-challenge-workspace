@@ -9,21 +9,15 @@ on:
 
 jobs:
   integration:
+    environment: Development
     uses: ./.github/workflows/deploy-environment.yml
-    permissions:
-      contents: read
 
   delivery:
     needs: [integration]
+    environment: Staging
     uses: ./.github/workflows/deploy-environment.yml
-    permissions:
-      contents: read
-      packages: write
-      id-token: write
 
   deployment:
     needs: [delivery]
+    environment: Production
     uses: ./.github/workflows/deploy-environment.yml
-    permissions:
-      packages: read
-    secrets: inherit
