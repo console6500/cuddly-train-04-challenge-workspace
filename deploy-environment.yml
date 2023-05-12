@@ -1,0 +1,16 @@
+name: Deploy Environment
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "1. Deplopyment step one"
+      - run: echo "2. Deplopyment step one"
+      - run: echo "3. Deplopyment step one"
+      - run: echo "4. Deplopyment step one"
+      - run: echo "## ${{ inputs.ENVIRONMENT }} deployment complete" >> $GITHUB_STEP_SUMMARY
